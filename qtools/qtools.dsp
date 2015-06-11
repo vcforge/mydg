@@ -110,6 +110,10 @@ SOURCE=.\qgarray.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\qglist.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\qglobal.cpp
 # End Source File
 # Begin Source File
@@ -164,6 +168,10 @@ SOURCE=.\qdatastream.h
 # Begin Source File
 
 SOURCE=.\qgarray.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\qglist.h
 # End Source File
 # Begin Source File
 
