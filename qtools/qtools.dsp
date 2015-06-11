@@ -142,6 +142,10 @@ SOURCE=.\qstring.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\qstringlist.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\qtextcodec.cpp
 # End Source File
 # Begin Source File
@@ -167,6 +171,10 @@ SOURCE=.\qarray.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\qasciidict.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\qbuffer.h
 # End Source File
 # Begin Source File
@@ -180,6 +188,10 @@ SOURCE=.\qcstring.h
 # Begin Source File
 
 SOURCE=.\qdatastream.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\qdict.h
 # End Source File
 # Begin Source File
 
@@ -231,6 +243,10 @@ SOURCE=.\qstring.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\qstringlist.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\qstrlist.h
 # End Source File
 # Begin Source File
@@ -239,7 +255,15 @@ SOURCE=.\qtextcodec.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\qtl.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\qutfcodec.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\qvaluelist.h
 # End Source File
 # Begin Source File
 
