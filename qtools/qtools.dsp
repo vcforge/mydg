@@ -102,6 +102,10 @@ SOURCE=.\qglobal.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\qgstring.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\qiodevice.cpp
 # End Source File
 # Begin Source File
@@ -132,6 +136,10 @@ SOURCE=.\qgarray.h
 # Begin Source File
 
 SOURCE=.\qglobal.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\qgstring.h
 # End Source File
 # Begin Source File
 
