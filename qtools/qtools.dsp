@@ -42,7 +42,7 @@ RSC=rc.exe
 # PROP Intermediate_Dir "Release"
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "QTOOLS_EXPORTS" /Yu"stdafx.h" /FD /c
-# ADD CPP /nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "QTOOLS_EXPORTS" /Yu"stdafx.h" /FD /c
+# ADD CPP /nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "QTOOLS_EXPORTS" /D "_OS_WIN32_" /Yu"stdafx.h" /FD /c
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804 /d "NDEBUG"
@@ -68,7 +68,7 @@ LINK32=link.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "QTOOLS_EXPORTS" /Yu"stdafx.h" /FD /GZ /c
-# ADD CPP /nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "QTOOLS_EXPORTS" /FR /Yu"stdafx.h" /FD /GZ /c
+# ADD CPP /nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "QTOOLS_EXPORTS" /D "_OS_WIN32_" /FR /Yu"stdafx.h" /FD /GZ /c
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804 /d "_DEBUG"
@@ -107,11 +107,31 @@ SOURCE=.\qdatastream.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\qdatetime.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\qdir.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\qdir_win32.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\qfile.cpp
 # End Source File
 # Begin Source File
 
 SOURCE=.\qfile_win32.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\qfileinfo.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\qfileinfo_win32.cpp
 # End Source File
 # Begin Source File
 
@@ -200,7 +220,15 @@ SOURCE=.\qdatastream.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\qdatetime.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\qdict.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\qdir.h
 # End Source File
 # Begin Source File
 
@@ -209,6 +237,10 @@ SOURCE=.\qfile.h
 # Begin Source File
 
 SOURCE=.\qfiledefs_p.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\qfileinfo.h
 # End Source File
 # Begin Source File
 

@@ -238,20 +238,9 @@
 #endif
 
 # define F_OK	0
-
-#if defined(_OS_FATFS_)
-# define F_OK	0
 # define X_OK	1
 # define W_OK	2
 # define R_OK	4
-#endif
-
-#if defined(_OS_MAC_) && !defined(_OS_UNIX_)
-# define F_OK	0
-# define X_OK	1
-# define W_OK	2
-# define R_OK	4
-#endif
 
 struct QFileInfoCache
 {

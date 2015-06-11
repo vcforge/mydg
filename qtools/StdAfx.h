@@ -18,6 +18,7 @@
 
 // TODO: reference additional headers your program requires here
 #include <io.h>
+#include<direct.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
