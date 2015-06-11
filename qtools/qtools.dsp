@@ -98,6 +98,10 @@ SOURCE=.\qcollection.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\qdatastream.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\qgarray.cpp
 # End Source File
 # Begin Source File
@@ -136,6 +140,10 @@ SOURCE=.\qbuffer.h
 # Begin Source File
 
 SOURCE=.\qcollection.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\qdatastream.h
 # End Source File
 # Begin Source File
 

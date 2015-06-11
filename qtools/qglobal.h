@@ -10,6 +10,8 @@
 #define Q_EXPORT __declspec(dllimport)
 #endif
 
+Q_EXPORT bool qSysInfo( int *wordSize, bool *bigEndian );
+
 typedef int intptr_t;
 
 typedef unsigned char	uchar;
