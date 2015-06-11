@@ -68,7 +68,7 @@ LINK32=link.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "QTOOLS_EXPORTS" /Yu"stdafx.h" /FD /GZ /c
-# ADD CPP /nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "QTOOLS_EXPORTS" /Yu"stdafx.h" /FD /GZ /c
+# ADD CPP /nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "QTOOLS_EXPORTS" /FR /Yu"stdafx.h" /FD /GZ /c
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804 /d "_DEBUG"
@@ -104,6 +104,14 @@ SOURCE=.\qcstring.cpp
 # Begin Source File
 
 SOURCE=.\qdatastream.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\qfile.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\qfile_win32.cpp
 # End Source File
 # Begin Source File
 
@@ -193,6 +201,14 @@ SOURCE=.\qdatastream.h
 # Begin Source File
 
 SOURCE=.\qdict.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\qfile.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\qfiledefs_p.h
 # End Source File
 # Begin Source File
 

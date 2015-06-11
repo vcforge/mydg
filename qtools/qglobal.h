@@ -22,6 +22,8 @@ typedef unsigned long	ulong;
 typedef char	       *pchar;
 typedef uchar	       *puchar;
 typedef const char     *pcchar;
+typedef __int64            int64;
+typedef unsigned __int64   uint64;
 
 typedef signed char	Q_INT8;			// 8 bit signed
 typedef unsigned char	Q_UINT8;		// 8 bit unsigned
