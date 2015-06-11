@@ -191,11 +191,19 @@ SOURCE=.\qiodevice.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\qqueue.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\qregexp.h
 # End Source File
 # Begin Source File
 
 SOURCE=.\qshared.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\qstack.h
 # End Source File
 # Begin Source File
 
