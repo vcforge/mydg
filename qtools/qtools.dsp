@@ -134,7 +134,19 @@ SOURCE=.\qregexp.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\qstring.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\qtextcodec.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\qtools.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\qutfcodec.cpp
 # End Source File
 # Begin Source File
 
@@ -204,6 +216,22 @@ SOURCE=.\qshared.h
 # Begin Source File
 
 SOURCE=.\qstack.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\qstring.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\qstrlist.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\qtextcodec.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\qutfcodec.h
 # End Source File
 # Begin Source File
 

@@ -31,6 +31,23 @@ typedef unsigned int	Q_UINT32;		// 32 bit unsigned
 typedef long		Q_INT64;		// up to 64 bit signed
 typedef unsigned long	Q_UINT64;		// up to 64 bit unsigned
 
+#if defined(_CC_MSVC_)
+// Workaround for static const members.
+#define QT_STATIC_CONST static
+#define QT_STATIC_CONST_IMPL
+#else
+#define QT_STATIC_CONST static const
+#define QT_STATIC_CONST_IMPL const
+#endif
+
+//
+// Utility macros and inline functions
+//
+
+#define QMAX(a,b)	((a) > (b) ? (a) : (b))
+#define QMIN(a,b)	((a) < (b) ? (a) : (b))
+#define QABS(a)		((a) >= 0  ? (a) : -(a))
+
 //
 // Use to avoid "unused parameter" warnings
 //
