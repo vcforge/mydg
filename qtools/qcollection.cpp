@@ -36,7 +36,7 @@
 **********************************************************************/
 
 #include "StdAfx.h"
-#include "qtools.h"
+#include "qglobal.h"
 #include "qcollection.h"
 
 // NOT REVISED

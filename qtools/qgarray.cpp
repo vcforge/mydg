@@ -36,7 +36,6 @@
 **********************************************************************/
 
 #include "StdAfx.h"
-#include "qtools.h"
 #define	 QGARRAY_CPP
 #include "qgarray.h"
 #include <stdlib.h>

@@ -2,7 +2,7 @@
 //
 
 #include "stdafx.h"
-#include "qtools.h"
+#include "qglobal.h"
 
 BOOL APIENTRY DllMain( HANDLE hModule, 
                        DWORD  ul_reason_for_call, 

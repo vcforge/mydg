@@ -1,5 +1,4 @@
 #include "StdAfx.h"
-#include "qtools.h"
 #include "qglobal.h"
 
 void qFatal( const char *msg, ... )

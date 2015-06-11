@@ -102,6 +102,10 @@ SOURCE=.\qglobal.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\qiodevice.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\qtools.cpp
 # End Source File
 # Begin Source File
@@ -113,6 +117,10 @@ SOURCE=.\StdAfx.cpp
 # Begin Group "Header Files"
 
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
+# Begin Source File
+
+SOURCE=.\qarray.h
+# End Source File
 # Begin Source File
 
 SOURCE=.\qcollection.h
@@ -127,11 +135,11 @@ SOURCE=.\qglobal.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\qshared.h
+SOURCE=.\qiodevice.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\qtools.h
+SOURCE=.\qshared.h
 # End Source File
 # Begin Source File
 
