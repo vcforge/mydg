@@ -12,6 +12,7 @@
 
 Q_EXPORT bool qSysInfo( int *wordSize, bool *bigEndian );
 
+typedef unsigned int uintptr_t;
 typedef int intptr_t;
 
 typedef unsigned char	uchar;
