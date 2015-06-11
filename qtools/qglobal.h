@@ -38,7 +38,9 @@ typedef unsigned long	Q_UINT64;		// up to 64 bit unsigned
 #define Q_UNUSED(x) x=x;
 #define Q_CONST_UNUSED(x) (void)x;
 
-Q_EXPORT bool qt_check_pointer( bool c, const char *, int );
+Q_EXPORT void qWarning( const char *, ... );	// print warning message
+
+Q_EXPORT void qFatal( const char *, ... );	// print fatal message and exit
 
 #if defined(CHECK_NULL)
 #define CHECK_PTR(p) (qt_check_pointer((p)==0,__FILE__,__LINE__))

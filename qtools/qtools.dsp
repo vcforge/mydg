@@ -98,6 +98,10 @@ SOURCE=.\qcollection.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\qcstring.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\qdatastream.cpp
 # End Source File
 # Begin Source File
@@ -115,6 +119,10 @@ SOURCE=.\qgstring.cpp
 # Begin Source File
 
 SOURCE=.\qiodevice.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\qregexp.cpp
 # End Source File
 # Begin Source File
 
@@ -143,6 +151,10 @@ SOURCE=.\qcollection.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\qcstring.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\qdatastream.h
 # End Source File
 # Begin Source File
@@ -160,6 +172,10 @@ SOURCE=.\qgstring.h
 # Begin Source File
 
 SOURCE=.\qiodevice.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\qregexp.h
 # End Source File
 # Begin Source File
 

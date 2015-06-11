@@ -19,6 +19,8 @@
 // TODO: reference additional headers your program requires here
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdarg.h>
+#include <ctype.h>
 
 #include <assert.h>
 

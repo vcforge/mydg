@@ -86,6 +86,10 @@ bool qSysInfo( int *wordSize, bool *bigEndian )
     return TRUE;
 }
 
+void qWarning( const char *msg, ... )
+{
+}
+
 void qFatal( const char *msg, ... )
 {
     exit(0);
