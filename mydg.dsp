@@ -85,6 +85,19 @@ LINK32=link.exe
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
 # Begin Source File
 
+SOURCE=.\md5.c
+
+!IF  "$(CFG)" == "mydg - Win32 Release"
+
+!ELSEIF  "$(CFG)" == "mydg - Win32 Debug"
+
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
 SOURCE=.\mydg.cpp
 # End Source File
 # Begin Source File
@@ -96,6 +109,14 @@ SOURCE=.\StdAfx.cpp
 # Begin Group "Header Files"
 
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
+# Begin Source File
+
+SOURCE=.\md5.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\md5_loc.h
+# End Source File
 # Begin Source File
 
 SOURCE=.\StdAfx.h
