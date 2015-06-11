@@ -118,6 +118,10 @@ SOURCE=.\qgstring.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\qgvector.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\qiodevice.cpp
 # End Source File
 # Begin Source File
@@ -168,6 +172,10 @@ SOURCE=.\qglobal.h
 # Begin Source File
 
 SOURCE=.\qgstring.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\qgvector.h
 # End Source File
 # Begin Source File
 
