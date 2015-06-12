@@ -63,7 +63,7 @@ Q_EXPORT int qstrnicmp( const char *str1, const char *str2, uint len );
 
 /** This is an alternative implementation of QCString. 
  */
-class QGString 
+class Q_EXPORT QGString 
 {
   public:
     QGString(); // make null string
