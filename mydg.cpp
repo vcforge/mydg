@@ -4,9 +4,11 @@
 #include "stdafx.h"
 #include "types.h"
 #include "config.h"
+#include "sortdict.h"
 
 int main(int argc, char* argv[])
 {
+	SDict<int> dict;
 	return 0;
 }
 

@@ -159,6 +159,10 @@ SOURCE=.\portable.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\sortdict.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\StdAfx.h
 # End Source File
 # Begin Source File

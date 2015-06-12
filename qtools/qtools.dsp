@@ -268,6 +268,10 @@ SOURCE=.\qgvector.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\qintdict.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\qiodevice.h
 # End Source File
 # Begin Source File
