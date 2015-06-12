@@ -2,6 +2,11 @@
 //
 
 #include "stdafx.h"
+#include "qtools/qdatastream.h"
+#include "qtools/qdict.h"
+#include "qtools/qlist.h"
+#include "qtools/qcstring.h"
+#include "qtools/qdir.h"
 #include "doxygen.h"
 #include "types.h"
 #include "config.h"

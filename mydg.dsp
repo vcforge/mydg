@@ -101,6 +101,14 @@ SOURCE=.\doxygen.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\filedef.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\filename.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\ftextstream.cpp
 # End Source File
 # Begin Source File
@@ -160,6 +168,14 @@ SOURCE=.\definition.h
 # Begin Source File
 
 SOURCE=.\doxygen.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\filedef.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\filename.h
 # End Source File
 # Begin Source File
 
