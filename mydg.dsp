@@ -85,6 +85,14 @@ LINK32=link.exe
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
 # Begin Source File
 
+SOURCE=.\config.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\debug.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\ftextstream.cpp
 # End Source File
 # Begin Source File
@@ -99,6 +107,10 @@ SOURCE=.\md5.c
 
 !ENDIF 
 
+# End Source File
+# Begin Source File
+
+SOURCE=.\message.cpp
 # End Source File
 # Begin Source File
 
@@ -123,6 +135,10 @@ SOURCE=.\config.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\debug.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\ftextstream.h
 # End Source File
 # Begin Source File
@@ -132,6 +148,10 @@ SOURCE=.\md5.h
 # Begin Source File
 
 SOURCE=.\md5_loc.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\message.h
 # End Source File
 # Begin Source File
 
