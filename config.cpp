@@ -25,6 +25,54 @@ void Config::create()
 //  addConfigOptions(this);
 }
 
+QStrList &Config::getList(const char *fileName,int num,const char *name) const
+{
+  ConfigOption *opt = m_dict->find(name);
+  if (opt==0) 
+  {
+    config_err("%s<%d>: Internal error: Requested unknown option %s!\n",fileName,num,name);
+    exit(1);
+  }
+  else if (opt->kind()!=ConfigOption::O_List)
+  {
+    config_err("%d<%d>: Internal error: Requested option %s not of list type!\n",fileName,num,name);
+    exit(1);
+  }
+  return *((ConfigList *)opt)->valueRef();
+}
+
+QCString &Config::getEnum(const char *fileName,int num,const char *name) const
+{
+  ConfigOption *opt = m_dict->find(name);
+  if (opt==0) 
+  {
+    config_err("%s<%d>: Internal error: Requested unknown option %s!\n",fileName,num,name);
+    exit(1);
+  }
+  else if (opt->kind()!=ConfigOption::O_Enum)
+  {
+    config_err("%s<%d>: Internal error: Requested option %s not of enum type!\n",fileName,num,name);
+    exit(1);
+  }
+  return *((ConfigEnum *)opt)->valueRef();
+}
+
+int &Config::getInt(const char *fileName,int num,const char *name) const
+{
+  ConfigOption *opt = m_dict->find(name);
+  if (opt==0) 
+  {
+    config_err("%s<%d>: Internal error: Requested unknown option %s!\n",fileName,num,name);
+    exit(1);
+  }
+  else if (opt->kind()!=ConfigOption::O_Int)
+  {
+    config_err("%s<%d>: Internal error: Requested option %s not of integer type!\n",fileName,num,name);
+    exit(1);
+  }
+  return *((ConfigInt *)opt)->valueRef();
+}
+
 bool &Config::getBool(const char *fileName,int num,const char *name) const
 {
   ConfigOption *opt = m_dict->find(name);
