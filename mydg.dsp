@@ -106,6 +106,10 @@ SOURCE=.\mydg.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\portable.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\StdAfx.cpp
 # ADD CPP /Yc"stdafx.h"
 # End Source File
@@ -128,6 +132,10 @@ SOURCE=.\md5.h
 # Begin Source File
 
 SOURCE=.\md5_loc.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\portable.h
 # End Source File
 # Begin Source File
 

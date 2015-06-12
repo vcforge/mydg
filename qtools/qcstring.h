@@ -68,7 +68,7 @@ class QRegExp;
 /** This is an alternative implementation of QCString. It provides basically
  *  the same functions but uses reference counting and copy on write.
  */
-class QCString
+class Q_EXPORT QCString
 {
 public:
     /** creates an empty string */

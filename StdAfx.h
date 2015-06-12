@@ -16,6 +16,9 @@
 
 // TODO: reference additional headers your program requires here
 #include <windows.h>
+#include <shellapi.h>
+#define _WIN32_DCOM
+#include <objbase.h>
 
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.
