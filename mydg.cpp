@@ -2,13 +2,14 @@
 //
 
 #include "stdafx.h"
+#include "doxygen.h"
 #include "types.h"
 #include "config.h"
 #include "sortdict.h"
 
 int main(int argc, char* argv[])
 {
-	SDict<int> dict;
+	parseInput();
 	return 0;
 }
 

@@ -97,6 +97,10 @@ SOURCE=.\definition.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\doxygen.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\ftextstream.cpp
 # End Source File
 # Begin Source File
@@ -152,6 +156,10 @@ SOURCE=.\debug.h
 # Begin Source File
 
 SOURCE=.\definition.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\doxygen.h
 # End Source File
 # Begin Source File
 
