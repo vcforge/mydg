@@ -85,6 +85,10 @@ LINK32=link.exe
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
 # Begin Source File
 
+SOURCE=.\arguments.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\commentcnv.cpp
 # End Source File
 # Begin Source File
@@ -102,6 +106,10 @@ SOURCE=.\definition.cpp
 # Begin Source File
 
 SOURCE=.\doxygen.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\entry.cpp
 # End Source File
 # Begin Source File
 
@@ -163,6 +171,10 @@ SOURCE=.\util.cpp
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
 # Begin Source File
 
+SOURCE=.\arguments.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\bufstr.h
 # End Source File
 # Begin Source File
@@ -184,6 +196,10 @@ SOURCE=.\definition.h
 # Begin Source File
 
 SOURCE=.\doxygen.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\entry.h
 # End Source File
 # Begin Source File
 

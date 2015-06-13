@@ -7,6 +7,7 @@
 #include "qtools/qcache.h"
 #include "util.h"
 #include "doxygen.h"
+#include "entry.h"
 #include "portable.h"
 #include "filename.h"
 #include "filedef.h"
@@ -20,6 +21,7 @@ ParserManager   *parserManager   = NULL;
 FileNameList    *inputNameList   = new FileNameList;       // all input files
 FileNameDict    *inputNameDict   = new FileNameDict(10007);
 FileNameDict    *includeNameDict = new FileNameDict(10007);     // include names
+static FileStorage     *g_storage = 0;
 static StringList       g_inputFiles;
 
 //----------------------------------------------------------------------
@@ -269,7 +271,7 @@ static ParserInterface *getParserForFile(const char *fn)
 }
 
 static void parseFile(ParserInterface *parser,
-                      FileDef *fd,const char *fn,
+                      Entry *root,EntryNav *rootNav,FileDef *fd,const char *fn,
                       bool sameTu,QStrList &filesInSameTu)
 {
   static bool clangAssistedParsing = FALSE;
@@ -310,10 +312,18 @@ static void parseFile(ParserInterface *parser,
   convertCppComments(&preBuf,&convBuf,fileName);
 
   convBuf.addChar('\0');
+
+  // use language parse to parse the file
+  parser->parseInput(fileName,convBuf.data(),root,sameTu,filesInSameTu);
+
+  // store the Entry tree in a file and create an index to
+  // navigate/load entries
+  //printf("root->createNavigationIndex for %s\n",fd->name().data());
+  root->createNavigationIndex(rootNav,g_storage,fd);
 }
 
 //! parse the list of input files
-static void parseFiles()
+static void parseFiles(Entry *root,EntryNav *rootNav)
 {
   {
     StringListIterator it(g_inputFiles);
@@ -328,7 +338,7 @@ static void parseFiles()
 	  if( parser )
 	  {
         parser->startTranslationUnit(s->data());
-        parseFile(parser,fd,s->data(),FALSE,filesInSameTu);
+        parseFile(parser,root,rootNav,fd,s->data(),FALSE,filesInSameTu);
 	  }
     }
   }
@@ -622,5 +632,11 @@ void parseInput()
 
   searchInputFiles();
 
-  parseFiles();
+  Entry *root=new Entry;
+  EntryNav *rootNav = new EntryNav(0,root);
+  rootNav->setEntry(root);
+
+  parseFiles(root, rootNav);
+
+  delete rootNav;
 }
