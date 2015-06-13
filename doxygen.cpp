@@ -9,7 +9,10 @@
 #include "doxygen.h"
 #include "filename.h"
 #include "filedef.h"
+#include "parserintf.h"
+#include "bufstr.h"
 
+ParserManager   *parserManager   = new ParserManager;
 FileNameList    *inputNameList   = new FileNameList;       // all input files
 FileNameDict    *inputNameDict   = new FileNameDict(10007);
 FileNameDict    *includeNameDict = new FileNameDict(10007);     // include names
@@ -134,6 +137,63 @@ int readFileOrDirectory(const char *s,
                         QDict<void> *paths = 0
                        );
 
+//----------------------------------------------------------------------------
+
+static ParserInterface *getParserForFile(const char *fn)
+{
+  QCString fileName=fn;
+  QCString extension;
+  int sep = fileName.findRev('/');
+  int ei = fileName.findRev('.');
+  if (ei!=-1 && (sep==-1 || ei>sep)) // matches dir/file.ext but not dir.1/file
+  {
+    extension=fileName.right(fileName.length()-ei);
+  }
+  else
+  {
+    extension = ".no_extension";
+  }
+
+  return parserManager->getParser(extension);
+}
+
+static void parseFile(ParserInterface *parser,
+                      FileDef *fd,const char *fn,
+                      bool sameTu,QStrList &filesInSameTu)
+{
+  static bool clangAssistedParsing = FALSE;
+  QCString fileName=fn;
+  QCString extension;
+  int ei = fileName.findRev('.');
+  if (ei!=-1)
+  {
+    extension=fileName.right(fileName.length()-ei);
+  }
+  else
+  {
+    extension = ".no_extension";
+  }
+
+  QFileInfo fi(fileName);
+  BufStr preBuf(fi.size()+4096);
+
+  if (true && 
+      parser->needsPreprocessing(extension))
+  {
+    BufStr inBuf(fi.size()+4096);
+//    readInputFile(fileName,inBuf);
+//    preprocessFile(fileName,inBuf,preBuf);
+  }
+  else // no preprocessing
+  {
+//    readInputFile(fileName,preBuf);
+  }
+  if (preBuf.data() && preBuf.curPos()>0 && *(preBuf.data()+preBuf.curPos()-1)!='\n')
+  {
+    preBuf.addChar('\n'); // add extra newline to help parser
+  }
+}
+
 //! parse the list of input files
 static void parseFiles()
 {
@@ -145,10 +205,13 @@ static void parseFiles()
       bool ambig;
       QStrList filesInSameTu;
       FileDef *fd=findFileDef(inputNameDict,s->data(),ambig);
-//      ASSERT(fd!=0);
-//      ParserInterface * parser = getParserForFile(s->data());
-//      parser->startTranslationUnit(s->data());
-//      parseFile(parser,root,rootNav,fd,s->data(),FALSE,filesInSameTu);
+      ASSERT(fd!=0);
+      ParserInterface * parser = getParserForFile(s->data());
+	  if( parser )
+	  {
+        parser->startTranslationUnit(s->data());
+        parseFile(parser,fd,s->data(),FALSE,filesInSameTu);
+	  }
     }
   }
 }

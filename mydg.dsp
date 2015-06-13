@@ -155,6 +155,10 @@ SOURCE=.\util.cpp
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
 # Begin Source File
 
+SOURCE=.\bufstr.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\config.h
 # End Source File
 # Begin Source File
@@ -196,6 +200,10 @@ SOURCE=.\md5_loc.h
 # Begin Source File
 
 SOURCE=.\message.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\parserintf.h
 # End Source File
 # Begin Source File
 
