@@ -8,4 +8,6 @@ class StringDict : public QDict<QCString>
     virtual ~StringDict() {}
 };
 
+void initDoxygen();
+void cleanUpDoxygen();
 void parseInput();

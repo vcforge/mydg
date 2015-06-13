@@ -14,7 +14,9 @@
 
 int main(int argc, char* argv[])
 {
+	initDoxygen();
 	parseInput();
+	cleanUpDoxygen();
 	return 0;
 }
 

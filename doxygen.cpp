@@ -7,12 +7,15 @@
 #include "qtools/qcache.h"
 #include "util.h"
 #include "doxygen.h"
+#include "portable.h"
 #include "filename.h"
 #include "filedef.h"
 #include "parserintf.h"
 #include "bufstr.h"
+#include "outputgen.h"
+#include "fileparser.h"
 
-ParserManager   *parserManager   = new ParserManager;
+ParserManager   *parserManager   = NULL;
 FileNameList    *inputNameList   = new FileNameList;       // all input files
 FileNameDict    *inputNameDict   = new FileNameDict(10007);
 FileNameDict    *includeNameDict = new FileNameDict(10007);     // include names
@@ -123,6 +126,19 @@ exit:
   return 0;
 }
 
+//----------------------------------------------------------------------------
+
+void initDoxygen()
+{
+  parserManager = new ParserManager;
+  parserManager->registerDefaultParser(         new FileParser);
+}
+
+void cleanUpDoxygen()
+{
+  delete parserManager;
+}
+
 int readFileOrDirectory(const char *s,
                         FileNameList *fnList,
                         FileNameDict *fnDict,
@@ -136,6 +152,100 @@ int readFileOrDirectory(const char *s,
                         QDict<void> *killDict = 0,
                         QDict<void> *paths = 0
                        );
+
+//----------------------------------------------------------------------------
+
+/*! takes the \a buf of the given length \a len and converts CR LF (DOS)
+ * or CR (MAC) line ending to LF (Unix).  Returns the length of the
+ * converted content (i.e. the same as \a len (Unix, MAC) or
+ * smaller (DOS).
+ */
+int filterCRLF(char *buf,int len)
+{
+  int src = 0;    // source index
+  int dest = 0;   // destination index
+  char c;         // current character
+
+  while (src<len)
+  {
+    c = buf[src++];            // Remember the processed character.
+    if (c == '\r')             // CR to be solved (MAC, DOS)
+    {
+      c = '\n';                // each CR to LF
+      if (src<len && buf[src] == '\n')
+        ++src;                 // skip LF just after CR (DOS) 
+    }
+    else if ( c == '\0' && src<len-1) // filter out internal \0 characters, as it will confuse the parser
+    {
+      c = ' ';                 // turn into a space
+    }
+    buf[dest++] = c;           // copy the (modified) character to dest
+  }
+  return dest;                 // length of the valid part of the buf
+}
+
+//! read a file name \a fileName and optionally filter and transcode it
+bool readInputFile(const char *fileName,BufStr &inBuf,bool filter=TRUE,bool isSourceCode=FALSE)
+{
+  // try to open file
+  int size=0;
+  //uint oldPos = dest.curPos();
+  //printf(".......oldPos=%d\n",oldPos);
+
+  QFileInfo fi(fileName);
+  if (!fi.exists()) return FALSE;
+  QCString filterName = getFileFilter(fileName,isSourceCode);
+  if (filterName.isEmpty() || !filter)
+  {
+    QFile f(fileName);
+    if (!f.open(IO_ReadOnly))
+    {
+      return FALSE;
+    }
+    size=fi.size();
+    // read the file
+    inBuf.skip(size);
+    if (f.readBlock(inBuf.data()/*+oldPos*/,size)!=size)
+    {
+      return FALSE;
+    }
+  }
+  else
+  {
+    QCString cmd=filterName+" \""+fileName+"\"";
+    FILE *f=portable_popen(cmd,"r");
+    if (!f)
+    {
+      return FALSE;
+    }
+    const int bufSize=1024;
+    char buf[bufSize];
+    int numRead;
+    while ((numRead=(int)fread(buf,1,bufSize,f))>0)
+    {
+      //printf(">>>>>>>>Reading %d bytes\n",numRead);
+      inBuf.addArray(buf,numRead),size+=numRead;
+    }
+    portable_pclose(f);
+    inBuf.at(inBuf.curPos()) ='\0';
+  }
+
+  int start=0;
+
+  //inBuf.addChar('\n'); /* to prevent problems under Windows ? */
+
+  // and translate CR's
+  size=inBuf.curPos()-start;
+  int newSize=filterCRLF(inBuf.data()+start,size);
+  //printf("filter char at %p size=%d newSize=%d\n",dest.data()+oldPos,size,newSize);
+  if (newSize!=size) // we removed chars
+  {
+    inBuf.shrink(newSize); // resize the array
+    //printf(".......resizing from %d to %d result=[%s]\n",oldPos+size,oldPos+newSize,dest.data());
+  }
+  inBuf.addChar(0);
+  return TRUE;
+}
 
 //----------------------------------------------------------------------------
 
@@ -181,12 +291,12 @@ static void parseFile(ParserInterface *parser,
       parser->needsPreprocessing(extension))
   {
     BufStr inBuf(fi.size()+4096);
-//    readInputFile(fileName,inBuf);
+    readInputFile(fileName,inBuf);
 //    preprocessFile(fileName,inBuf,preBuf);
   }
   else // no preprocessing
   {
-//    readInputFile(fileName,preBuf);
+    readInputFile(fileName,preBuf);
   }
   if (preBuf.data() && preBuf.curPos()>0 && *(preBuf.data()+preBuf.curPos()-1)!='\n')
   {

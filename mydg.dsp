@@ -109,6 +109,10 @@ SOURCE=.\filename.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\fileparser.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\ftextstream.cpp
 # End Source File
 # Begin Source File
@@ -183,6 +187,10 @@ SOURCE=.\filename.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\fileparser.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\ftextstream.h
 # End Source File
 # Begin Source File
@@ -200,6 +208,10 @@ SOURCE=.\md5_loc.h
 # Begin Source File
 
 SOURCE=.\message.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\outputgen.h
 # End Source File
 # Begin Source File
 

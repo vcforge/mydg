@@ -206,6 +206,38 @@ QCString convertNameToFile(const char *name,bool allowDots,bool allowUnderscore)
   return result;
 }
 
+static QCString getFilterFromList(const char *name,const QStrList &filterList,bool &found)
+{
+  found=FALSE;
+  // compare the file name to the filter pattern list
+  QStrListIterator sli(filterList);
+  char* filterStr;
+  for (sli.toFirst(); (filterStr = sli.current()); ++sli)
+  {
+    QCString fs = filterStr;
+    int i_equals=fs.find('=');
+    if (i_equals!=-1)
+    {
+      QCString filterPattern = fs.left(i_equals);
+      QRegExp fpat(filterPattern,portable_fileSystemIsCaseSensitive(),TRUE); 
+      if (fpat.match(name)!=-1) 
+      {
+        // found a match!
+        QCString filterName = fs.mid(i_equals+1);
+        if (filterName.find(' ')!=-1)
+        { // add quotes if the name has spaces
+          filterName="\""+filterName+"\"";
+        }
+        found=TRUE;
+        return filterName;
+      }
+    }
+  }
+
+  // no match
+  return "";
+}
+
 /*! looks for a filter for the file \a name.  Returns the name of the filter
  *  if there is a match for the file name, otherwise an empty string.
  *  In case \a inSourceCode is TRUE then first the source filter list is
@@ -216,7 +248,27 @@ QCString getFileFilter(const char* name,bool isSourceCode)
   // sanity check
   if (name==0) return "";
 
-  return "";
+  QStrList filterSrcList;
+  QStrList filterList;
+
+  QCString filterName;
+  bool found=FALSE;
+  if (isSourceCode && !filterSrcList.isEmpty())
+  { // first look for source filter pattern list
+    filterName = getFilterFromList(name,filterSrcList,found);
+  }
+  if (!found && filterName.isEmpty())
+  { // then look for filter pattern list
+    filterName = getFilterFromList(name,filterList,found);
+  }
+  if (!found)
+  { // then use the generic input filter
+    return "";
+  }
+  else
+  {
+    return filterName;
+  }
 }
 
 //----------------------------------------------------------------------------
