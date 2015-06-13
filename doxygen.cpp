@@ -12,6 +12,7 @@
 #include "filedef.h"
 #include "parserintf.h"
 #include "bufstr.h"
+#include "commentcnv.h"
 #include "outputgen.h"
 #include "fileparser.h"
 
@@ -302,6 +303,13 @@ static void parseFile(ParserInterface *parser,
   {
     preBuf.addChar('\n'); // add extra newline to help parser
   }
+
+  BufStr convBuf(preBuf.curPos()+1024);
+
+  // convert multi-line C++ comments to C style comments
+  convertCppComments(&preBuf,&convBuf,fileName);
+
+  convBuf.addChar('\0');
 }
 
 //! parse the list of input files

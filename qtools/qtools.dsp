@@ -183,6 +183,10 @@ SOURCE=.\qtextcodec.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\qtextstream.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\qtools.cpp
 # End Source File
 # Begin Source File
@@ -321,6 +325,10 @@ SOURCE=.\qstrlist.h
 # Begin Source File
 
 SOURCE=.\qtextcodec.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\qtextstream.h
 # End Source File
 # Begin Source File
 
