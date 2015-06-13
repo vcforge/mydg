@@ -4,12 +4,121 @@
 #include "qtools/qlist.h"
 #include "qtools/qcstring.h"
 #include "qtools/qdir.h"
+#include "qtools/qcache.h"
 #include "util.h"
 #include "doxygen.h"
 #include "filename.h"
+#include "filedef.h"
 
+FileNameList    *inputNameList   = new FileNameList;       // all input files
+FileNameDict    *inputNameDict   = new FileNameDict(10007);
 FileNameDict    *includeNameDict = new FileNameDict(10007);     // include names
 static StringList       g_inputFiles;
+
+//----------------------------------------------------------------------
+
+/** Cache element for the file name to FileDef mapping cache. */
+struct FindFileCacheElem
+{
+  FindFileCacheElem(FileDef *fd,bool ambig) : fileDef(fd), isAmbig(ambig) {}
+  FileDef *fileDef;
+  bool isAmbig;
+};
+
+static QCache<FindFileCacheElem> g_findFileDefCache(5000);
+
+FileDef *findFileDef(const FileNameDict *fnDict,const char *n,bool &ambig)
+{
+  ambig=FALSE;
+  if (n==0) return 0;
+
+  const int maxAddrSize = 20;
+  char addr[maxAddrSize];
+  qsnprintf(addr,maxAddrSize,"%p:",fnDict);
+  QCString key = addr;
+  key+=n;
+
+  g_findFileDefCache.setAutoDelete(TRUE);
+  FindFileCacheElem *cachedResult = g_findFileDefCache.find(key);
+  //printf("key=%s cachedResult=%p\n",key.data(),cachedResult);
+  if (cachedResult)
+  {
+    ambig = cachedResult->isAmbig;
+    //printf("cached: fileDef=%p\n",cachedResult->fileDef);
+    return cachedResult->fileDef;
+  }
+  else
+  {
+    cachedResult = new FindFileCacheElem(0,FALSE);
+  }
+
+  QCString name=QDir::cleanDirPath(n).utf8();
+  QCString path;
+  int slashPos;
+  FileName *fn;
+  if (name.isEmpty()) goto exit;
+  slashPos=QMAX(name.findRev('/'),name.findRev('\\'));
+  if (slashPos!=-1)
+  {
+    path=name.left(slashPos+1);
+    name=name.right(name.length()-slashPos-1); 
+    //printf("path=%s name=%s\n",path.data(),name.data());
+  }
+  if (name.isEmpty()) goto exit;
+  if ((fn=(*fnDict)[name]))
+  {
+    //printf("fn->count()=%d\n",fn->count());
+    if (fn->count()==1)
+    {
+      FileDef *fd = fn->getFirst();
+#if defined(_WIN32) || defined(__MACOSX__) // Windows or MacOSX
+      bool isSamePath = fd->getPath().right(path.length()).lower()==path.lower();
+#else // Unix
+      bool isSamePath = fd->getPath().right(path.length())==path;
+#endif
+      if (path.isEmpty() || isSamePath)
+      {
+        cachedResult->fileDef = fd;
+        g_findFileDefCache.insert(key,cachedResult);
+        //printf("=1 ===> add to cache %p\n",fd);
+        return fd;
+      }
+    }
+    else // file name alone is ambiguous
+    {
+      int count=0;
+      FileNameIterator fni(*fn);
+      FileDef *fd;
+      FileDef *lastMatch=0;
+      QCString pathStripped = path;
+      for (fni.toFirst();(fd=fni.current());++fni)
+      {
+        QCString fdStripPath = fd->getPath();
+        if (path.isEmpty() || fdStripPath.right(pathStripped.length())==pathStripped) 
+        { 
+          count++; 
+          lastMatch=fd; 
+        }
+      }
+      //printf(">1 ===> add to cache %p\n",fd);
+
+      ambig=(count>1);
+      cachedResult->isAmbig = ambig;
+      cachedResult->fileDef = lastMatch;
+      g_findFileDefCache.insert(key,cachedResult);
+      return lastMatch;
+    }
+  }
+  else
+  {
+    //printf("not found!\n");
+  }
+exit:
+  //printf("0  ===> add to cache %p: %s\n",cachedResult,n);
+  g_findFileDefCache.insert(key,cachedResult);
+  //delete cachedResult;
+  return 0;
+}
 
 int readFileOrDirectory(const char *s,
                         FileNameList *fnList,
@@ -33,6 +142,13 @@ static void parseFiles()
     QCString *s;
     for (;(s=it.current());++it)
     {
+      bool ambig;
+      QStrList filesInSameTu;
+      FileDef *fd=findFileDef(inputNameDict,s->data(),ambig);
+//      ASSERT(fd!=0);
+//      ParserInterface * parser = getParserForFile(s->data());
+//      parser->startTranslationUnit(s->data());
+//      parseFile(parser,root,rootNav,fd,s->data(),FALSE,filesInSameTu);
     }
   }
 }
@@ -276,8 +392,8 @@ void searchInputFiles()
 	  pl.append("*.cpp");
       readFileOrDirectory(
           path,
-          0,
-          0,
+          inputNameList,
+          inputNameDict,
           &excludeNameDict,
           &pl,
           &exclPatterns,

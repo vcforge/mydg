@@ -33,8 +33,16 @@ class FileName : public FileList
     void generateDiskNames();
 
   private:
+    int compareValues(const FileDef *item1,const FileDef *item2) const;
     QCString name;
     QCString fName;
+};
+
+/** Iterator for FileDef objects in a FileName list. */
+class FileNameIterator : public QListIterator<FileDef>
+{
+  public:
+    FileNameIterator(const FileName &list);
 };
 
 /** Class representing a list of FileName objects. */

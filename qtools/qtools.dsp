@@ -139,6 +139,10 @@ SOURCE=.\qgarray.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\qgcache.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\qgdict.cpp
 # End Source File
 # Begin Source File
@@ -208,6 +212,10 @@ SOURCE=.\qbuffer.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\qcache.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\qcollection.h
 # End Source File
 # Begin Source File
@@ -245,6 +253,10 @@ SOURCE=.\qfileinfo.h
 # Begin Source File
 
 SOURCE=.\qgarray.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\qgcache.h
 # End Source File
 # Begin Source File
 
