@@ -219,6 +219,46 @@ QCString getFileFilter(const char* name,bool isSourceCode)
   return "";
 }
 
+//----------------------------------------------------------------------------
+// returns TRUE if the name of the file represented by `fi' matches
+// one of the file patterns in the `patList' list.
+
+bool patternMatch(const QFileInfo &fi,const QStrList *patList)
+{
+  bool found=FALSE;
+  if (patList)
+  { 
+    QStrListIterator it(*patList);
+    QCString pattern;
+
+    QCString fn = fi.fileName().data();
+    QCString fp = fi.filePath().data();
+    QCString afp= fi.absFilePath().data();
+
+    for (it.toFirst();(pattern=it.current());++it)
+    {
+      if (!pattern.isEmpty())
+      {
+        int i=pattern.find('=');
+        if (i!=-1) pattern=pattern.left(i); // strip of the extension specific filter name
+
+#if defined(_WIN32) || defined(__MACOSX__) // Windows or MacOSX
+        QRegExp re(pattern,FALSE,TRUE); // case insensitive match 
+#else                // unix
+        QRegExp re(pattern,TRUE,TRUE);  // case sensitive match
+#endif
+        found = re.match(fn)!=-1 ||
+                re.match(fp)!=-1 ||
+                re.match(afp)!=-1;
+        if (found) break;
+        //printf("Matching `%s' against pattern `%s' found=%d\n",
+        //    fi->fileName().data(),pattern.data(),found);
+      }
+    }
+  }
+  return found;
+}
+
 int computeQualifiedIndex(const QCString &name)
 {
   int i = name.find('<');

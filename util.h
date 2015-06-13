@@ -1,4 +1,5 @@
 #include "qtools/qcstring.h"
+#include "qtools/qfileinfo.h"
 #include "types.h"
 
 inline bool isId(int c)
@@ -12,6 +13,8 @@ QCString langToString(SrcLangExt lang);
 QCString getLanguageSpecificSeparator(SrcLangExt lang,bool classScope=FALSE);
 
 QCString getFileFilter(const char* name,bool isSourceCode);
+
+bool patternMatch(const QFileInfo &fi,const QStrList *patList);
 
 int computeQualifiedIndex(const QCString &name);
 

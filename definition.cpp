@@ -133,7 +133,7 @@ void DefinitionImpl::init(const char *df, const char *n)
 
 static bool matchExcludedSymbols(const char *name)
 {
-  static QStrList &exclSyms = Config_getList("EXCLUDE_SYMBOLS");
+  static QStrList exclSyms;
   if (exclSyms.count()==0) return FALSE; // nothing specified
   const char *pat = exclSyms.first();
   QCString symName = name;
@@ -190,7 +190,7 @@ static bool matchExcludedSymbols(const char *name)
 
 void Definition::addToMap(const char *name,Definition *d)
 {
-  bool vhdlOpt = Config_getBool("OPTIMIZE_OUTPUT_VHDL");
+  bool vhdlOpt = false;
   QCString symbolName = name;
   int index=computeQualifiedIndex(symbolName);
   if (!vhdlOpt && index!=-1) symbolName=symbolName.mid(index+2);
@@ -610,7 +610,7 @@ static bool lastCharIsMultibyte(const QCString &s)
 
 void Definition::_setBriefDescription(const char *b,const char *briefFile,int briefLine)
 {
-  static QCString outputLanguage = Config_getEnum("OUTPUT_LANGUAGE");
+  static QCString outputLanguage = "English";
   static bool needsDot = outputLanguage!="Japanese" && 
                          outputLanguage!="Chinese" &&
                          outputLanguage!="Korean";

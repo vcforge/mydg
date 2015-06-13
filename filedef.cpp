@@ -152,7 +152,7 @@ void FileDef::addMembersToMemberGroup()
 
 QCString FileDef::name() const 
 { 
-  if (Config_getBool("FULL_PATH_NAMES")) 
+  if (true) 
     return m_fileName; 
   else 
     return Definition::name(); 
@@ -538,7 +538,7 @@ bool FileDef::isDocumentationFile() const
 
 void FileDef::acquireFileVersion()
 {
-  QCString vercmd = Config_getString("FILE_VERSION_FILTER");
+  QCString vercmd;
   if (!vercmd.isEmpty() && !m_filePath.isEmpty() && m_filePath!="generated") 
   {
     msg("Version of %s : ",m_filePath.data());
